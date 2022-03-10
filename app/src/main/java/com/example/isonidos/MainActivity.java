@@ -44,8 +44,24 @@ public class MainActivity extends AppCompatActivity {
         for (int i=0; i<listaCanciones.length; i++){
             //creamos un botón por código y lo añadimos a la vista de botones
             Button b = creaBoton(i, listaCanciones);
-
+            auxiliar.addView(b);
+            if (i % columnas == columnas-1){
+                auxiliar = creaLineaBotones(i);
+                principal.addView(auxiliar);
+            }
+            listaSonidos.put(b.getTag().toString(), b.getText().toString());
+            //b.setText();
+     }
+    }
+    private String acortaEtiqueta(String s){
+        if (s.substring(0,2).contains("v_")){
+            s = s.substring(s.indexOf('_')+1);
         }
+        if (s.contains("_")){
+            s = s.substring(s.indexOf('_'));
+        }
+        s = s.replace('_',' ');
+        return s;
     }
 
     public void reproduceSonido(View vista){
